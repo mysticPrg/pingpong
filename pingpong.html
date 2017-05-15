@@ -3,6 +3,30 @@
     <meta charset="utf-8"/>
     <title>Canvas tutorial</title>
     <script type="text/javascript">
+
+      class PingPong
+      {
+        constructor()
+        {
+          this.barObj = new Bar();
+          this.ballObj = new Ball();
+          this.boardObj = new Board();
+          
+        }
+        Start()
+        {
+          this.OnDraw();
+        }
+        End()
+        {
+
+        }
+        OnDraw()
+        {
+          this.barObj.Draw();
+          this.ballObj.Draw();
+        }
+      }
       class Component
       {
         constructor()
@@ -14,7 +38,40 @@
 
         }
       }
-      class Ball extends Component
+      class Circle extends Component
+      {
+        constructor()
+        {
+          super();
+        }
+        Draw()
+        {
+
+        }
+      }
+      class Box extends Component
+      {
+        constructor()
+        {
+          super();
+        }
+        Draw()
+        {
+
+        }
+      }
+      class InnerBox extends Component
+      {
+        constructor()
+        {
+          super();
+        }
+        Draw()
+        {
+
+        }
+      }
+      class Ball extends Circle
       {
         constructor()
         {
@@ -33,8 +90,9 @@
           }
         }
         
+
       }
-      class Bar extends Component
+      class Bar extends Box
       {
         constructor()
         { 
@@ -52,14 +110,26 @@
           }
         }
       }
+      class Board extends InnerBox
+      {
+        constructor()
+        {
+          super();
+        }
+        Draw()
+        {
+
+        }
+        WhereToTouch()
+        {
+
+        }
+      }
 
       function init() 
       {
-        
-          var barObj = new Bar();
-          var ballObj = new Ball();
-          barObj.Draw();
-          ballObj.Draw();
+        var pong = new PingPong();
+        pong.Start();
       }
       
     </script>
