@@ -1,0 +1,131 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Canvas tutorial</title>
+    <script type="text/javascript">
+
+      class PingPong {
+        constructor(ctx, canvas) {
+          this.barObj = new Bar(ctx, 15, 70);
+          this.ballObj = new Ball(ctx, canvas.width/2, canvas.height/2, 7);
+          this.boardObj = new Board(ctx, 800, 600, 3);
+          
+        }
+        start() {
+          this.onDraw();
+        }
+        end(){
+
+        }
+        onDraw() {
+          this.barObj.onDraw();
+          this.ballObj.onDraw();
+          this.boardObj.onDraw();
+        }
+      }
+      class Component {
+        constructor() {
+          
+        }
+        onDraw(){
+
+        }
+      }
+      class Circle extends Component {
+        constructor(ctx) {
+          super();
+          this.ctx = ctx;
+        }
+        onDraw() {
+
+        }
+      }
+      class Box extends Component {
+        constructor(ctx) {
+          super();
+          this.ctx = ctx;
+        }
+        onDraw() {
+
+        }
+      }
+      class InnerBox extends Component {
+        constructor(ctx) {
+          super();
+          this.ctx = ctx;
+        }
+        onDraw() {
+
+        }
+      }
+      class Ball extends Circle {
+        constructor(ctx, position_x, position_y, r) {
+          super(ctx);
+          this.position_x = position_x;
+          this.position_y = position_y;
+          this.r = r;
+
+        }
+        onDraw() {
+          
+          this.ctx.fillStyle = 'gray';
+          this.ctx.beginPath();
+          this.ctx.arc(this.position_x, this.position_y, this.r, 0, 2*Math.PI, false);
+          this.ctx.fill();
+          
+        }
+      }
+      class Bar extends Box {
+        constructor(ctx, w, h) { 
+          super(ctx);  //super를 선언해줘야 상속 객체 선언 후 사용 가능.
+          this.w = w;
+          this.h = h;
+        }
+        onDraw() {
+          
+          this.ctx.strokeStyle = 'red'; //super.ctx.~ 가 아닌 this.ctx.~
+          this.ctx.strokeRect(0, 0, this.w, this.h);
+        }
+      }
+      class Board extends InnerBox {
+        constructor(ctx, w, h, thickness) {
+          super(ctx);
+          this.w = w;
+          this.h = h;
+          this.thickness = thickness;
+        }
+        onDraw() {
+          this.ctx.strokeStyle = 'black';
+          this.ctx.lineWidth = this.thickness;
+          this.ctx.beginPath();
+          this.ctx.moveTo(0, 0);
+          this.ctx.lineTo(this.w, 0);
+          this.ctx.lineTo(this.w, this.h);
+          this.ctx.lineTo(0, this.h);
+          this.ctx.lineTo(0, 0);
+          this.ctx.stroke();
+        }
+        OnWhereToTouch() {
+
+        }
+      }
+
+      function init() {
+        var canvas = document.getElementById("mycanvas");
+        if (canvas.getContext) {
+        var ctx = canvas.getContext('2d');
+        }
+
+        var pong = new PingPong(ctx, canvas);
+        pong.start();
+      }
+      
+    </script>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+  </head>
+  <body onload="init();">   <!--수정예정-->
+    <canvas id="mycanvas" width="800" height="600"></canvas>    <!--수정예정-->
+  </body>
+</html>
